@@ -1,0 +1,20 @@
+<html>
+<div id="chartContainer">
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+  <script src="http://dimplejs.org/dist/dimple.v2.2.0.min.js"></script>
+  <script type="text/javascript">
+    var svg = dimple.newSvg("#chartContainer", 590, 600);
+    d3.tsv("./topWordsTinnitus.tsv", function (data) {
+      console.log(data);
+      var myChart = new dimple.chart(svg, data);
+      myChart.setBounds(95, 30, 480, 530)
+      var x = myChart.addMeasureAxis("x", "freq");
+      x.tickFormat = ".";
+      var y = myChart.addCategoryAxis("y", "term");
+      y.addOrderRule("freq");
+      myChart.addSeries(null, dimple.plot.bar);
+      myChart.draw();
+    });
+  </script>
+</div>
+</html>
